@@ -1,0 +1,125 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-kapt'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    defaultConfig {
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+
+        applicationId globalConfiguration["androidApplicationId"]
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
+        testInstrumentationRunner globalConfiguration["testInstrumentationRunner"]
+        testApplicationId globalConfiguration["testApplicationId"]
+        multiDexEnabled true
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    signingConfigs {
+        releaseConfig {
+            keyAlias 'key0'
+            storeFile file('../KeyStore')
+        }
+    }
+
+    buildTypes {
+        debug{
+            buildConfigField "String", "MOVIE_DB_API_KEY", "\"b11840e03e14b688e0dc368cb3b06e54\""
+            buildConfigField "String", "MOVIE_DB_API_BASE_URL", "\"https://api.themoviedb.org\""
+            buildConfigField "String", "MOVIE_DB_IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/w500\""
+        }
+        release {
+            buildConfigField "String", "MOVIE_DB_API_KEY", "\"b11840e03e14b688e0dc368cb3b06e54\""
+            buildConfigField "String", "MOVIE_DB_API_BASE_URL", "\"https://api.themoviedb.org\""
+            buildConfigField "String", "MOVIE_DB_IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/w500\""
+
+            signingConfig signingConfigs.releaseConfig
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        // work-runtime-ktx 2.1.0 and above now requires Java 8
+        jvmTarget = "1.8"
+
+        // Enable Coroutines and Flow APIs
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
+    }
+
+    lintOptions {
+        disable "UnsafeExperimentalUsageError",
+                "UnsafeExperimentalUsageWarning"
+    }
+}
+
+dependencies {
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+    implementation project(':domain')
+    implementation project(':data')
+    kapt presentationDependencies.daggerCompiler
+    kapt presentationDependencies.androidProcessor
+    implementation 'com.android.support:multidex:1.0.3'
+
+
+    kapt "com.github.bumptech.glide:compiler:4.11.0"
+    implementation "com.github.bumptech.glide:glide:4.11.0"
+
+    implementation presentationDependencies.rxJava
+    implementation presentationDependencies.rxAndroid
+    implementation presentationDependencies.stdLib
+    implementation presentationDependencies.dagger
+    implementation presentationDependencies.daggerAndroidSupport
+    implementation presentationDependencies.appCompat
+    implementation presentationDependencies.retrofit
+    implementation presentationDependencies.adapterRXJava2
+    implementation presentationDependencies.converterGSON
+    implementation presentationDependencies.loggingInterceptor
+    implementation presentationDependencies.picasso
+    implementation presentationDependencies.androidSegmented
+    implementation presentationDependencies.constraintLayout
+    implementation presentationDependencies.androidMaterial
+    androidTestImplementation presentationTestDependencies.coreLibrary
+    androidTestImplementation presentationTestDependencies.runner
+    androidTestImplementation presentationTestDependencies.rules
+    androidTestImplementation presentationTestDependencies.truth
+    androidTestImplementation presentationTestDependencies.espressoCore
+    androidTestImplementation presentationTestDependencies.espressoContrib
+    androidTestImplementation presentationTestDependencies.espressoIntents
+    androidTestImplementation presentationTestDependencies.espressoAccessibility
+    androidTestImplementation presentationTestDependencies.jUnitExt
+
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+
+    implementation "androidx.paging:paging-runtime:3.0.0-alpha06"
+}
+
+
+android.applicationVariants.all { variant ->
+
+    variant.outputs.all { output ->
+        def formattedDate = new Date().format('yy_MM_dd')
+        def fileName = "SongApp" + "_V" + versionCode + "_" + formattedDate + "_" + "-${variant.versionName}.apk"
+        outputFileName = new File("folder_with_apk_build", fileName)
+    }
+}

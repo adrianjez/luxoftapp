@@ -1,0 +1,109 @@
+allprojects {
+  repositories {
+    jcenter()
+  }
+}
+
+ext {
+    //Android
+    androidMinSdkVersion = 17
+    androidTargetSdkVersion = 30
+    androidCompileSdkVersion = 30
+    androidMaterialVersion = '1.2.0'
+    androidxLifecycleExtensionsVersion = '2.0.0'
+    androidxAppCompatVersion = '1.1.0-alpha01'
+    androidxConstraintLayoutVersion = '2.0.0-alpha3'
+
+    //Libraries
+    daggerVersion = '2.21'
+    rxJavaVersion = '2.1.4'
+    rxAndroidVersion = '2.0.1'
+    gsonVersion = '2.8.5'
+    androidAnnotationsVersion = '21.0.3'
+    arrowVersion = '1.0.0'
+    retrofitVersion = '2.9.0'
+    okhttpLogginInterceptorVersion = '3.9.1'
+    picassoVersion = '2.71828'
+    androidSegmented = '1.0.6'
+
+    //Testing
+    robolectricVersion = '3.1.1'
+    jUnitVersion = '4.12'
+    assertJVersion = '1.7.1'
+    mockitoVersion = '1.9.5'
+    testCoreVersion = '1.1.0'
+    testRunnerVersion = '1.1.1'
+    testRulesVersion = '1.1.1'
+    testTruthVersion = "1.1.0"
+    jUnitExtVersion = '1.1.0'
+    espressoVersion = '3.1.1'
+    testingSupportLibVersion = '0.1'
+
+
+    presentationDependencies = [
+            androidProcessor:       "com.google.dagger:dagger-android-processor:${daggerVersion}",
+            daggerCompiler:         "com.google.dagger:dagger-compiler:${daggerVersion}",
+            daggerAndroidSupport:   "com.google.dagger:dagger-android-support:${daggerVersion}",
+            dagger:                 "com.google.dagger:dagger:${daggerVersion}",
+            rxJava:                 "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid:              "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            retrofit:               "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            adapterRXJava2:         "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            converterGSON:          "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            loggingInterceptor:     "com.squareup.okhttp3:logging-interceptor:${okhttpLogginInterceptorVersion}",
+            stdLib:                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}",
+            lifecycleExtensions:    "androidx.lifecycle:lifecycle-extensions:${androidxLifecycleExtensionsVersion}",
+            appCompat:              "androidx.appcompat:appcompat:${androidxAppCompatVersion}",
+            constraintLayout:       "androidx.constraintlayout:constraintlayout:${androidxConstraintLayoutVersion}",
+            picasso:                "com.squareup.picasso:picasso:${picassoVersion}",
+            androidSegmented:       "info.hoang8f:android-segmented:${androidSegmented}",
+            androidMaterial:        "com.google.android.material:material:${androidMaterialVersion}"
+    ]
+
+    presentationTestDependencies = [
+
+            coreLibrary:            "androidx.test:core:${testCoreVersion}",
+            runner:                 "androidx.test:runner:${testRunnerVersion}",
+            rules:                  "androidx.test:rules:${testRulesVersion}",
+
+            truth:                  "androidx.test.ext:truth:${testTruthVersion}",
+            jUnitExt:               "androidx.test.ext:junit:${jUnitExtVersion}",
+
+            espressoCore:           "androidx.test.espresso:espresso-core:${espressoVersion}",
+            espressoContrib:        "androidx.test.espresso:espresso-contrib:${espressoVersion}",
+            espressoIntents:        "androidx.test.espresso:espresso-intents:${espressoVersion}",
+            espressoAccessibility:  "androidx.test.espresso:espresso-accessibility:${espressoVersion}"
+    ]
+
+    domainDependencies = [
+            rxJava:                 "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid:              "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            dagger:                 "com.google.dagger:dagger:${daggerVersion}",
+            stdLib:                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}",
+            gson:                   "com.google.code.gson:gson:${gsonVersion}"
+    ]
+
+    domainTestDependencies = [
+            junit:                  "junit:junit:${jUnitVersion}",
+            mockito:                "org.mockito:mockito-core:${mockitoVersion}",
+            assertj:                "org.assertj:assertj-core:${assertJVersion}"
+    ]
+
+    dataDependencies = [
+            gson:                   "com.google.code.gson:gson:${gsonVersion}",
+            rxJava:                 "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid:              "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            retrofit:               "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            stdLib:                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}",
+            androidProcessor:       "com.google.dagger:dagger-android-processor:${daggerVersion}",
+            daggerCompiler:         "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger:                 "com.google.dagger:dagger:${daggerVersion}"
+    ]
+
+    dataTestDependencies = [
+            junit:                  "junit:junit:${jUnitVersion}",
+            assertj:                "org.assertj:assertj-core:${assertJVersion}",
+            mockito:                "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric:            "org.robolectric:robolectric:${robolectricVersion}",
+    ]
+}
