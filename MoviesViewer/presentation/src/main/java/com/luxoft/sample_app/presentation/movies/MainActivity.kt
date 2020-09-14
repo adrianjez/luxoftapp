@@ -1,10 +1,8 @@
-package com.luxoft.sample_app.presentation.search
+package com.luxoft.sample_app.presentation.movies
 
 import android.os.Bundle
 import com.luxoft.sample_app.R
 import dagger.android.support.DaggerAppCompatActivity
-
-
 
 class MainActivity : DaggerAppCompatActivity() {
 

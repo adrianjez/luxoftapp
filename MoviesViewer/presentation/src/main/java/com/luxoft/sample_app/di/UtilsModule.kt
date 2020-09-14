@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.AssetManager
+import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -26,4 +27,9 @@ class UtilsModule {
         return app.getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE)
     }
 
+    @Provides
+    @Singleton
+    fun provideResources(app: Application) : Resources {
+        return app.resources
+    }
 }

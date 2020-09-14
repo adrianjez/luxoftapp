@@ -1,4 +1,4 @@
-package com.luxoft.sample_app.presentation.search.adapter
+package com.luxoft.sample_app.presentation.movies.adapter
 
 import android.view.LayoutInflater
 import android.view.View

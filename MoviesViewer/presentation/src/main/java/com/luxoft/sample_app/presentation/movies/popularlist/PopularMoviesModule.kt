@@ -1,4 +1,4 @@
-package com.luxoft.sample_app.presentation.search.movie.popularlist
+package com.luxoft.sample_app.presentation.movies.popularlist
 
 import androidx.fragment.app.Fragment
 import dagger.Binds

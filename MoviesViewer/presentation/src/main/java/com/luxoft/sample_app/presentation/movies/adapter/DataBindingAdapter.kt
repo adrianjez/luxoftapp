@@ -1,4 +1,4 @@
-package com.luxoft.sample_app.presentation.search.adapter
+package com.luxoft.sample_app.presentation.movies.adapter
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

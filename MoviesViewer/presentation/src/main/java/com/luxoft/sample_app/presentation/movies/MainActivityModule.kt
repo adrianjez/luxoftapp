@@ -1,4 +1,4 @@
-package com.luxoft.sample_app.presentation.search
+package com.luxoft.sample_app.presentation.movies
 
 import androidx.appcompat.app.AppCompatActivity
 import dagger.Binds

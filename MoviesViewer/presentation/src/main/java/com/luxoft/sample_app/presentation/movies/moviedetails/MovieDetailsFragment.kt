@@ -1,9 +1,10 @@
-package com.luxoft.sample_app.presentation.search.movie.details
+package com.luxoft.sample_app.presentation.movies.moviedetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.luxoft.sample_app.databinding.FragmentMovieDetailsBinding
@@ -30,6 +31,13 @@ class MovieDetailsFragment : DaggerFragment() {
         binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         viewModel.loadMovieDetails(args.movieID)
+        subscribeUI()
         return binding.root
+    }
+
+    private fun subscribeUI(){
+        viewModel.isLoadingDisplayed.observe(viewLifecycleOwner, Observer {
+            binding.loadingView.visibility = if(it) View.VISIBLE else View.GONE
+        })
     }
 }

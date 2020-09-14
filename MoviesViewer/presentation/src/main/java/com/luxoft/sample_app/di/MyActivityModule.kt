@@ -1,7 +1,7 @@
 package com.luxoft.sample_app.di
 
-import com.luxoft.sample_app.presentation.search.MainActivity
-import com.luxoft.sample_app.presentation.search.MainActivityModule
+import com.luxoft.sample_app.presentation.movies.MainActivity
+import com.luxoft.sample_app.presentation.movies.MainActivityModule
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

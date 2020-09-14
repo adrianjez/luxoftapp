@@ -2,8 +2,8 @@ package com.luxoft.sample_app.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.luxoft.sample_app.presentation.search.movie.details.MovieDetailsViewModel
-import com.luxoft.sample_app.presentation.search.movie.popularlist.PopularMoviesViewModel
+import com.luxoft.sample_app.presentation.movies.moviedetails.MovieDetailsViewModel
+import com.luxoft.sample_app.presentation.movies.popularlist.PopularMoviesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

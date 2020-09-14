@@ -1,4 +1,4 @@
-package com.luxoft.sample_app.presentation.search.movie.popularlist
+package com.luxoft.sample_app.presentation.movies.popularlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.luxoft.sample_app.databinding.FragmentPopularMoviesBinding
 import com.luxoft.sample_app.di.viewmodel.DaggerViewModelFactory
-import com.luxoft.sample_app.presentation.search.adapter.AppLoadStateAdapter
-import com.luxoft.sample_app.presentation.search.adapter.MoviesAdapter
+import com.luxoft.sample_app.presentation.movies.adapter.AppLoadStateAdapter
+import com.luxoft.sample_app.presentation.movies.adapter.MoviesAdapter
 import com.luxoft.sample_app.utils.afterTextChangedDelayed
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.launch
@@ -23,19 +23,8 @@ class PopularMoviesFragment : DaggerFragment() {
     private lateinit var viewModel: PopularMoviesViewModel
     private lateinit var binding: FragmentPopularMoviesBinding
 
-    private val adapter = MoviesAdapter().also {
-        it.withLoadStateHeaderAndFooter(
-                header = AppLoadStateAdapter(it::retry),
-                footer = AppLoadStateAdapter(it::retry)
-        )
-    }
-
-    private val searchResultAdapter = MoviesAdapter().also {
-        it.withLoadStateHeaderAndFooter(
-                header = AppLoadStateAdapter(it::retry),
-                footer = AppLoadStateAdapter(it::retry)
-        )
-    }
+    val adapter = MoviesAdapter()
+    val searchResultAdapter = MoviesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +33,14 @@ class PopularMoviesFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPopularMoviesBinding.inflate(inflater, container, false)
-        binding.popularMoviesList.adapter = adapter
-        binding.searchResultList.adapter = searchResultAdapter
+        binding.popularMoviesList.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = AppLoadStateAdapter(adapter::retry),
+                footer = AppLoadStateAdapter(adapter::retry)
+        )
+        binding.searchResultList.adapter = searchResultAdapter.withLoadStateHeaderAndFooter(
+                header = AppLoadStateAdapter(searchResultAdapter::retry),
+                footer = AppLoadStateAdapter(searchResultAdapter::retry)
+        )
         binding.searchView.afterTextChangedDelayed { providedQuery ->
             viewModel.searchQuery(providedQuery)
         }

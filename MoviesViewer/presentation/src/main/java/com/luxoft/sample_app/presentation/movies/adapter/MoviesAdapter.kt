@@ -1,4 +1,4 @@
-package com.luxoft.sample_app.presentation.search.adapter
+package com.luxoft.sample_app.presentation.movies.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.luxoft.domain.model.Movie
 import com.luxoft.sample_app.databinding.FragmentPopularMoviesListItemBinding
-import com.luxoft.sample_app.presentation.search.movie.popularlist.PopularMoviesFragmentDirections
+import com.luxoft.sample_app.presentation.movies.popularlist.PopularMoviesFragmentDirections
 
 class MoviesAdapter : PagingDataAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieDiffUtil()){
 

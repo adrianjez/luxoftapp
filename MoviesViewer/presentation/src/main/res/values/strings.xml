@@ -3,4 +3,6 @@
     <string name="fragment_movie_details_rate">Rate:</string>
     <string name="fragment_movie_details_date">Date:</string>
     <string name="load_state_item_retry">Retry</string>
+    <string name="error_bottom_view_try_again">Try again</string>
+    <string name="network_error">Network error</string>
 </resources>
