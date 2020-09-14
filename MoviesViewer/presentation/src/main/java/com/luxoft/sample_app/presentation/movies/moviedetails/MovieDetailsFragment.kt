@@ -38,5 +38,8 @@ class MovieDetailsFragment : DaggerFragment() {
         viewModel.isLoadingDisplayed.observe(viewLifecycleOwner, {
             binding.loadingView.visibility = if(it) View.VISIBLE else View.GONE
         })
+        viewModel.hasError.observe(viewLifecycleOwner, {
+            binding.bottomErrorView.root.visibility = if(it) View.VISIBLE else View.GONE
+        })
     }
 }

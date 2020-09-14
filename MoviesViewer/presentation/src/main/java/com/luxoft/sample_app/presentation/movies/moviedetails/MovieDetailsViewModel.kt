@@ -17,8 +17,10 @@ class MovieDetailsViewModel @Inject constructor(
 
     val movieDetails = ObservableField<MovieDetails>()
     val isFavourite = ObservableField<Boolean>()
+    private var movieID: Long? = null
 
     fun loadMovieDetails(movieID: Long) {
+        this.movieID = movieID
         isLoadingDisplayed.postValue(true)
         viewModelScope.launch {
             isFavourite.set(useCase.isFavorite(movieID))
@@ -34,6 +36,12 @@ class MovieDetailsViewModel @Inject constructor(
                 isFavourite.set(!isCurrentlyFavourite)
                 useCase.setFavoriteState(movieDetails.id, !isCurrentlyFavourite)
             }
+        }
+    }
+
+    override fun retry(){
+        movieID?.let {
+            loadMovieDetails(it)
         }
     }
 }

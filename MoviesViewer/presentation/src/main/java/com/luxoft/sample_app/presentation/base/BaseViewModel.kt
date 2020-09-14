@@ -10,11 +10,11 @@ import com.luxoft.sample_app.R
 abstract class BaseViewModel constructor(private val resources: Resources) : ViewModel() {
 
     val errorMessage = ObservableField<String>()
-    val hasError = ObservableField(false)
+    val hasError = MutableLiveData(false)
 
     val isLoadingDisplayed = MutableLiveData(false)
 
-    fun retry() {}
+    open fun retry() {}
 
     protected fun <T> handleErrorIfNeeded(
             resultWrapper: ResultWrapper<T>,
@@ -22,15 +22,15 @@ abstract class BaseViewModel constructor(private val resources: Resources) : Vie
     ) {
         when (resultWrapper) {
             is ResultWrapper.NetworkError -> {
-                hasError.set(true)
+                hasError.postValue(true)
                 errorMessage.set(resources.getString(R.string.network_error))
             }
             is ResultWrapper.GenericError -> {
-                hasError.set(true)
+                hasError.postValue(true)
                 errorMessage.set(resultWrapper.error)
             }
             is ResultWrapper.Success -> {
-                hasError.set(false)
+                hasError.postValue(false)
                 successCallback(resultWrapper.value)
             }
         }
