@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.luxoft.sample_app.databinding.FragmentMovieDetailsBinding
@@ -36,7 +35,7 @@ class MovieDetailsFragment : DaggerFragment() {
     }
 
     private fun subscribeUI(){
-        viewModel.isLoadingDisplayed.observe(viewLifecycleOwner, Observer {
+        viewModel.isLoadingDisplayed.observe(viewLifecycleOwner, {
             binding.loadingView.visibility = if(it) View.VISIBLE else View.GONE
         })
     }
